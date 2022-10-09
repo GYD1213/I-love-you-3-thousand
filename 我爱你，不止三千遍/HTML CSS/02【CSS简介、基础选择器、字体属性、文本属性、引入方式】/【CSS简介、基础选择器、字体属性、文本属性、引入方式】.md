@@ -2,6 +2,30 @@
 
 > 本文档是个人对 Pink 老师课程的总结归纳及补充，转载请注明出处！ 
 
+# **工具：sublime** 
+
+[(43条消息) Sublime快速生成&快捷键_Joyce_lulu的博客-CSDN博客_sublime快速生成列表](https://blog.csdn.net/Joyce_lulu/article/details/99175229)
+
+[(43条消息) Sublime Merge——一款超好用的Git可视化工具_国家一级摸鱼选手的博客-CSDN博客_git可视化管理工具sublime merge](https://blog.csdn.net/qq302756113/article/details/112394807?spm=1001.2101.3001.6650.8&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-8-112394807-blog-105481003.pc_relevant_multi_platform_whitelistv3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Rate-8-112394807-blog-105481003.pc_relevant_multi_platform_whitelistv3&utm_relevant_index=14)
+
+> 输入html :5  回车
+>
+> 输入！ Tab
+
+可以快速生成html5骨架
+
+按住滚轮可以一次性选中多个位置
+
+### sublime快捷方式
+
+sublime可以快速提高我们代码的书写方式
+
+1.   生成标签直接输入标签名 按tab键即可 比如 div 然后tab链，就可以生成＜div＞<／div＞
+2.   如果想要生成多个相同标签加上＊就可以了比如 div＊3就可以快速生成3个div
+3.   如果有父子级关系的标签，可以用＞比如 ul＞就可以了
+4.   如果有兄弟关系的标签，用＋就可以了比如div＋p
+5.   如果生成带有类名或者d名字的，直换写．demo 或者 ＃two tab 键就可以了
+
 # 一、CSS简介
 
 **CSS 的主要使用场景就是布局网页，美化页面的。**
@@ -231,7 +255,7 @@ h1 {
 
 - 类选择器使用 `.`（英文点号）进行标识，后面紧跟类名（自定义，我们自己命名的）
 - 可以理解为给这个标签起了一个别名来表示
-- 长名称或词组可以使用**中横线** `-` 来为类命名
+- 长名称或词组可以使用**中横线** `-` 来为类命名，不建议使用`_`**下划线**来命名
 - 不能使用已有的关键字作为类名
 - 不要使用纯数字、中文等命名，尽量使用英文字母来表示
 - 命名要有意义，尽量使别人一眼就知道这个类名的目的（**可读性第一，长度第二，推荐使用英语，如果是使用拼音请使用全拼**）
@@ -838,11 +862,11 @@ div {
 }
 ```
 
-| 表示方式       | 属性值                                              |
-| -------------- | --------------------------------------------------- |
-| 预定义的颜色值 | red，green，blue，black，white，gray                |
-| 十六进制       | #FF0000，#FF6600，#29D794（每两位对应：#红R绿G蓝B） |
-| RGB 代码       | rgb(255, 0, 0) 或 rgb(100%, 0%, 0%)                 |
+| 表示方式       | 属性值                                                       |
+| -------------- | ------------------------------------------------------------ |
+| 预定义的颜色值 | red，green，blue，black，white，gray                         |
+| 十六进制       | #FF0000，#FF6600，#29D794（每两位对应：#红R绿G蓝B）如果两位相同就可以简写 如#FF0000--->#F00 ; #FF6600--->#F60 |
+| RGB 代码       | rgb(255, 0, 0) 或 rgb(100%, 0%, 0%)                          |
 
 **注意：**开发中最常用的是十六进制。
 
@@ -1136,7 +1160,58 @@ p {
 
 ![](mark-img/20210405144715962.jpg)
 
-## 4.6 文本属性总结
+## 4.6 字间距和单词间距
+
+`letter-spacing` 字间距
+
+`word-spacing` 单词间距 针对英文 中文无效
+
+## 4.7 颜色半透明（CSS3）
+
+文字颜色到了CSS3我们可以采取半透明的格式了，语法格式如下：
+
+~~~CSS
+color: rgba(r, g, b, a);
+/* a是alpha 透明的意思 取值范围在0-1之间 */
+~~~
+
+## 4.8 文字阴影（CSS3）
+
+![image-20221008104659112](mark-img/image-20221008104659112.png)
+
+`text-shadow` : 水平位置 垂直位置 模糊距离 阴影颜色
+
+~~~CSS
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>文字阴影</title>
+		<style>
+			
+			.shadow{
+				font-size: 100px;
+				font-weight: 700;
+				color: lightblue;
+				text-shadow: 5px 5px 2px gray;
+			/*  水平距离：正值阴影往右走
+				垂直距离：正值阴影往下走
+				前两个参数必须要写，后两个参数可以省略，会采取默认值 */
+	
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="shadow">郑辛茹</div>
+	</body>
+</html>
+~~~
+
+
+
+## 4.8 文本属性总结
 
 | 属性              | 表示     | 注意点                                                       |
 | ----------------- | -------- | ------------------------------------------------------------ |
@@ -1186,7 +1261,7 @@ p {
 ```
 
 - `<style>` 标签理论上可以放在 HTML 文档的任何地方，但一般会放到文档的 `<head>` 标签中
-- 目前的浏览器已经支持**省略** `type` **属性**
+- 目前的浏览器已经支持**省略** `type` **属性** ` type类型 css文本`
 - 通过此种方式，可以方便控制当前整个页面中的元素样式设置
 - 代码结构清晰，但是并没有实现结构与样式完全分离
 - 使用内部样式表设定 CSS，通常也被称为 `嵌入式引入`，这种方式是我们练习时常用的方式
@@ -1201,7 +1276,7 @@ p {
 - 在 HTML 页面中，使用 `<link>` 标签引入这个文件
 
 ```html
-<link rel="stylesheet" type="text/css" href="css文件路径">
+<link rel="stylesheet" type="text/css" href="css文件路径" />
 ```
 
 | 属性   | 作用                                                         |

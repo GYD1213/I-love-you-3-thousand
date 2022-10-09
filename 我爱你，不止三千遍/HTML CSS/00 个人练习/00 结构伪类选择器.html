@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>结构伪类选择器</title>
+		<style>
+			*{
+				font-family: 黑体
+				font-weight: 700;
+				font-size: 24px;
+			}
+			/* 选择第一个孩子 */
+			li:first-child{
+				color: gray;
+			}
+			/* 选择最后一个孩子 */
+			li:last-child{
+				color: #f3f;
+			}
+			/* 选择第四个孩子 */
+			li:nth-child(4){
+				color: lightblue;
+			}
+			/* ------------------------------------ */
+			/* ------------------------------------ */
+			/* 选择所有奇数孩子 */
+			li:nth-child(odd){
+				color: pink;
+			}
+			/* 选择所有偶数孩子 */
+			li:nth-child(even){
+				color: lightcoral;
+			}
+			/* 也可以使用公式，n从0开始 */
+			li:nth-child(2n-1){
+				color: pink;
+			}
+			li:nth-child(2n){
+				color: lightcoral;
+			}
+			/* ------------------------------------ */
+			/* ------------------------------------ */
+			/* 从最后一个孩子开始数，也就是最后一个是第一个 */
+			/* 选择倒数第5个元素 ，也就是正数第三个*/
+			li:nth-last-child(5){
+				color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>第1个</li>
+			<li>第2个</li>
+			<li>第3个</li>
+			<li>第4个</li>
+			<li>第5个</li>
+			<li>第6个</li>
+			<li>第7个</li>
+		</ul>
+	</body>
+</html>

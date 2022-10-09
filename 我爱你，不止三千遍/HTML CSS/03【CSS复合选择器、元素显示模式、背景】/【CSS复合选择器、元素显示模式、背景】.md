@@ -221,7 +221,9 @@ ul, div { 样式声明 }		 /* 选择 ul 和 div标签元素 */
 `伪类选择器` 书写最大的特点是用**冒号** `:` 表示，比如：`:hover`、`:first-child`。 
 因为伪类选择器很多，比如：`链接伪类`、`结构伪类` 等，所以这里先讲解常用的链接伪类选择器。
 
-> 伪类的由来：因为在页面中并没有这个真实存在的类，所以称为 “伪类”。
+> **伪类的由来：因为在页面中并没有这个真实存在的类，所以称为 “伪类”。**
+>
+> 类选择器用一个点  .  伪类选择器用两个点  :  
 
 ## 1.6 链接伪类选择器
 
@@ -229,16 +231,23 @@ ul, div { 样式声明 }		 /* 选择 ul 和 div标签元素 */
 
 - 为了确保生效且不冲突，请按照 `LVHA` 的顺序声明 `:link` `:visited` `:hover` `:active`
 
+  [^未访问的链接    已访问的链接      鼠标移动到上面      鼠标正在按下还没有弹起鼠标]: 
+
 - 记忆法：love hate 或者 lv 包包 hao 
 
 - 因为 a 链接在浏览器中具有默认样式，所以我们实际工作中都需要给链接单独指定样式
 
 **链接伪类选择器实际工作开发中的写法：**
 
+`实际工作中一般只需要:hover`
+
 ```css
 /* a 是标签选择器 所有的链接 */
 a {
+    font-weight:700;
+    font-size:16px;
 	color: gray;
+    text-decoration: none;
 }
 
 /* :hover 是链接伪类选择器 鼠标经过 */
@@ -292,7 +301,113 @@ a:hover {
 
 > 注意：`:hover` `:active` 也适用于其他标签元素。
 
-## 1.7 :focus伪类选择器
+## 1.7 结构（位置）伪类选择器（CSS3）
+
+- `:first-child`	选取属于其父元素的首个子元素的指定选择器
+
+- `:last-child`      选取属于其父元素的最后一个子元素的指定选择器
+
+- `:nth-child(n)`  匹配属于其父元素的第n个子元素，n从0开始，第几个元素，n就是几，括号里面也可以写odd-奇数 even-偶数
+
+- `:nth-last-child(n)`  匹配属于其父元素的倒数第n个子元素
+
+  ```css
+  <!DOCTYPE html>
+  <html lang="en">
+  	<head>
+  		<meta charset="UTF-8">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  		<title>结构伪类选择器</title>
+  		<style>
+  			*{
+  				font-family: 黑体
+  				font-weight: 700;
+  				font-size: 24px;
+  			}
+  			/* 选择第一个孩子 */
+  			li:first-child{
+  				color: gray;
+  			}
+  			/* 选择最后一个孩子 */
+  			li:last-child{
+  				color: #f3f;
+  			}
+  			/* 选择第四个孩子 */
+  			li:nth-child(4){
+  				color: lightblue;
+  			}
+  			/* ------------------------------------ */
+  			/* ------------------------------------ */
+  			/* 选择所有奇数孩子 */
+  			li:nth-child(odd){
+  				color: pink;
+  			}
+  			/* 选择所有偶数孩子 */
+  			li:nth-child(even){
+  				color: lightcoral;
+  			}
+  			/* 也可以使用公式，n从0开始 */
+  			li:nth-child(2n-1){
+  				color: pink;
+  			}
+  			li:nth-child(2n){
+  				color: lightcoral;
+  			}
+  			/* ------------------------------------ */
+  			/* ------------------------------------ */
+  			/* 从最后一个孩子开始数，也就是最后一个是第一个 */
+  			/* 选择倒数第5个元素 ，也就是正数第三个*/
+  			li:nth-last-child(5){
+  				color: black;
+  			}
+  		</style>
+  	</head>
+  	<body>
+  		<ul>
+  			<li>第1个</li>
+  			<li>第2个</li>
+  			<li>第3个</li>
+  			<li>第4个</li>
+  			<li>第5个</li>
+  			<li>第6个</li>
+  			<li>第7个</li>
+  		</ul>
+  	</body>
+  </html>
+  ```
+
+
+
+## 1.8 目标伪类选择器
+
+`:target` 目标伪类选择器 选择器可用于选取当前活动的目标元素
+
+~~~CSS
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>目标伪类选择器</title>
+		<style>
+			/* 点击我的姓名之后，id为name的就会变成红色，因为他被选中了 */
+			:target{
+				color: lightcoral;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="#name">我的姓名</a>
+		<div id="name">高雅典</div>
+		<div>郑辛茹</div>
+		
+	</body>
+</html>
+~~~
+
+
+
+## 1.9 :focus伪类选择器
 
 `:focus` 伪类选择器用于选取获得焦点的表单元素。
 
@@ -333,7 +448,7 @@ input:focus {
 
 ![](mark-img/20210405202554834.gif)
 
-## 1.8 复合选择器总结
+## 2.0 复合选择器总结
 
 | 选择器          | 作用                   | 特征             | 使用情况 | 隔开符号及用法                             |
 | --------------- | ---------------------- | ---------------- | -------- | ------------------------------------------ |
