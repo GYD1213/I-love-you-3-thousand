@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style>
+			.red{
+				color: red;
+			}
+			/* 注意不能有空格，此时会选中p标签中类名为red的 */
+			p.red{
+				font-size: 50px
+			}
+			ul .third{
+				/* 后代选择器，儿子孙子啥的都能选中 */
+				color: lightblue;
+				font-size: 35px;
+			}
+			ul>li{
+				/* 子代选择器，只选中亲儿子 */
+				color: lightgreen;
+				font-size: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="red">熊1</div>
+		<div>熊2</div>
+		<p class="red">小强</p>
+		<!-- 既有class为red的效果，也会有字体大小为50px的效果 -->
+		<p>张三</p>
+		<ul>
+			<li>number1</li>
+			<li>number2</li>
+			<li>
+				<span class="third">
+					number3
+				</span></li>
+			</ul>
+		</body>
+	</html>

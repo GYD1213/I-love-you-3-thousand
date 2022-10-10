@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style type="text/css">
+			/* 全等，完全等于 */
+			div[class=font1]{
+				color:red ;
+			}
+			/* 星等，任意位置存在这个字符就行 */
+			div[class*=font]{
+				font-size: 30px;
+				font-weight: 700;
+				font-family: 幼圆;
+				text-shadow: 8px 3px 2px grey;
+			}
+			/* 包含这个字符，且这个字符在开始位置 */
+			div[class^=head]{
+				font-size: 50px;
+				color: green;
+			}
+			/* 包含这个字符，且这个字符在结束位置 */
+			div[class$=footer]{
+				font-size: 50px;
+				color: greenyellow;
+			}
+		</style>
+		<body>
+			<div class="font1">属性选择器</div>
+			<div class="font2">属性选择器</div>
+			<div class="font3">属性选择器</div>
+			<div class="font4">属性选择器</div>
+			<div class="font5">属性选择器</div>
+			<div class="font6">属性选择器</div>
+			<div class="jd-footer">尾部</div>
+			<div class="tb-footer">尾部</div>
+			<div class="head-jd">头部</div>
+			<div class="head-tb">头部</div>
+		</body>
+	</html>

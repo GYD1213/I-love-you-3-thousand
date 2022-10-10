@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>文字效果</title>
+		<style>
+			div {
+				font: normal 700 100px 微软雅黑;
+				color: lightgray;
+			}
+			.out {
+				
+				text-shadow: 1px 1px 1px gray,
+							-1px -1px 1px white;
+			}
+			.in {
+				text-shadow: 1px 1px 1px white,
+							-1px -1px 1px gray;
+			}
+			body {
+				background-color: lightgray;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="out">
+			我是一行凸起的文字
+		</div>
+		<div class="in">我是一行凹下的文字</div>
+	</body>
+</html>

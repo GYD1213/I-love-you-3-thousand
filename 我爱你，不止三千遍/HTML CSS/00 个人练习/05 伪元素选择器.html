@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style>
+			/* 选择第一个字 */
+			p::first-letter{
+				color: red;
+				font-size: 30px;
+				font-family: 幼圆;
+			}
+			/* 选择第一行，注意 第一行是指在页面中显示的第一行，而不是p里面自己写的第一行 */
+			p::first-line{
+				color: lightblue;
+				font-weight: 700;
+			}
+			/* 选中文字的时候，文字会变成粉色 */
+			p::selection{
+				color: lightpink;
+				background-color: lightgray;
+			}
+			/* --------------------------------------------- */
+			/* before和after在盒子div的内部的前面插入或者是内部的后面插入 */
+			div::before{
+				content: 'before';
+				background-color: lightblue;
+			}
+			div::after{
+				content: 'after';
+				background-color: lightsalmon;
+				/* 将背景图片缩放成水平100px 垂直200px */
+				background-size: 100px 200px;
+				/* 将背景图片缩放成水平100px 垂直等比例缩放 */
+				background-size: 100px;
+				/* 将图片缩放为原来的一半 */
+				background-size: 50%;
+				/* 	自动调整图片的大小，始终保持等比例缩放，但是要求图片充满整个区域，直到长和宽都满足区域大小就停止，溢出部分自动隐藏 */
+				background-size: cover;
+				/* 等比例缩放，只要宽度或者高度其中一个满足容器要求就不再缩放/放大，能保证图片完整性 */
+				background-size: contain;
+			}
+			.top{
+				height: 500px;
+				width: 500px;
+				display: block;
+				color: white;
+				font-weight: 700;
+				background-image: url(text.jpg);
+				background-repeat: no-repeat;
+				background-size: cover;
+				/* 多背景图片 */
+				background: url(text.jpg) no-repeat left top ,
+				url(text1.jpg) no-repeat right bottom hotpink;
+			}
+		</style>
+	</head>
+	<body>
+		<span class="top">伪元素选择器1</span>
+		<p>
+			伪类选择器
+			用于**向某些选择器添加特殊的效果**，比如：给链接添加特殊效果（链接伪类），或选择第 n 个元素（结构伪类）。
+			伪类选择器
+			书写最大的特点是用**冒号** `:` 表示，比如：`:hover`、`:first-child`。 因为伪类选择器很多，比如：`链接伪类`、`结构伪类` 等，所以这里先讲解常用的链接伪类选择器。
+		</p>
+		<h1>伪元素选择器2</h1>
+		<div>
+			::before and ::after
+		</div>
+		
+	</body>
+</html>
