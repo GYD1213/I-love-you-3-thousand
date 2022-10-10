@@ -143,10 +143,53 @@ div>p { 样式声明 } 	/* 选择 div 里面所有最近一级 p 标签元素 */
 </html>
 ```
 
-## 1.4 并集选择器
+## 1.4 交集选择器
+
+交集选择器由两个选择器构成，其中第一个为标签选择器，第二个为class选择器，两个选择器之间不能有空格，如h3.special。
+
+`如果有空格的话会变成后代选择器`
+
+![image-20221009150328830](mark-img/image-20221009150328830.png)
+
+~~~CSS
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style>
+			.red{
+				color: red;
+			}
+			/* 注意不能有空格，此时会选中既是p标签，类名也为red的 */
+			p.red{
+				font-size: 50px
+			}
+		</style>
+	</head>
+	<body>
+		<div class="red">熊1</div>
+		<div>熊2</div>
+		<div>熊3</div>
+		<div>熊4</div>
+		<div>熊5</div>
+		<div>熊6</div>
+		<p class="red">小强</p>
+		<!-- 既有class为red的效果，也会有字体大小为50px的效果 -->
+		<p>张三</p>
+	</body>
+</html>
+~~~
+
+
+
+## 1.5 并集选择器
 
 `并集选择器` 可以选择多组标签，同时为他们定义相同的样式，通常用于**集体声明**。
-`并集选择器` 是各选择器通过**英文逗号** `,` 连接而成，任何形式的选择器都可以作为并集选择器的一部分。
+`并集选择器` 是各选择器通过**英文逗号** `,` 连接而成，任何形式的选择器（包括标签选择器、class类选择器、id选择器等）都可以作为并集选择器的一部分。如果某些选择器定义的样式完全相同，或部分相同，就可以利用并集选择器为他们定义相同的CSS样式。
+
+![image-20221009151235600](mark-img/image-20221009151235600.png)
 
 **语法：**
 
@@ -172,7 +215,7 @@ ul, div { 样式声明 }		 /* 选择 ul 和 div标签元素 */
 ```
 
 - 元素1 和 元素2 中间用逗号隔开（最后一个不加逗号）
-- 逗号可以理解为和的意思
+- **逗号可以理解为和的意思**
 - 并集选择器通常用于集体声明
 
 ```html
@@ -215,7 +258,130 @@ ul, div { 样式声明 }		 /* 选择 ul 和 div标签元素 */
 </html>
 ```
 
-## 1.5 伪类选择器
+## 1.6 属性选择器
+
+| 选择器       | 示例 | 含义                                |
+| ------------ | ---- | ----------------------------------- |
+| E[attr]      |      | 存在attr属性即可                    |
+| E[attr=val]  |      | 属性值完全等于val                   |
+| E[attr*=val] |      | 属性值里包含val字符并且在“任意”位置 |
+| E[attr^=val] |      | 属性值里包含val字符并且在“开始”位置 |
+| E[attr$=val] |      | 属性值里包含val字符并且在“结束”位置 |
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style type="text/css">
+			/* 全等，完全等于 */
+			div[class=font1]{
+				color:red ;
+			}
+			/* 星等，任意位置存在这个字符就行 */
+			div[class*=font]{
+				font-size: 30px;
+				font-weight: 700;
+				font-family: 幼圆;
+				text-shadow: 8px 3px 2px grey;
+			}
+			/* 包含这个字符，且这个字符在开始位置 */
+			div[class^=head]{
+				font-size: 50px;
+				color: green;
+			}
+			/* 包含这个字符，且这个字符在结束位置 */
+			div[class$=footer]{
+				font-size: 50px;
+				color: greenyellow;
+			}
+		</style>
+		<body>
+			<div class="font1">属性选择器</div>
+			<div class="font2">属性选择器</div>
+			<div class="font3">属性选择器</div>
+			<div class="font4">属性选择器</div>
+			<div class="font5">属性选择器</div>
+			<div class="font6">属性选择器</div>
+			<div class="jd-footer">尾部</div>
+			<div class="tb-footer">尾部</div>
+			<div class="head-jd">头部</div>
+			<div class="head-tb">头部</div>
+		</body>
+	</html>
+```
+
+
+
+## 1.7 伪元素选择器（CSS3）
+
+- `.first `   类选择器
+- `:first-child`   伪类选择器
+- `::first-letter`   伪元素选择器
+  - `::first-letter`   选择第一个字
+  - `::first-line`   选择第一行
+  - `::selection`   选中的时候的样式
+  - `::before`   在盒子内部的前面插入
+  - `::after`   在盒子内部的后面插入
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style>
+			/* 选择第一个字 */
+			p::first-letter{
+				color: red;
+				font-size: 30px;
+				font-family: 幼圆;
+			}
+			/* 选择第一行，注意 第一行是指在页面中显示的第一行，而不是p里面自己写的第一行 */
+			p::first-line{
+				color: lightblue;
+				font-weight: 700;
+			}
+			/* 选中文字的时候，文字会变成粉色 */
+			p::selection{
+				color: lightpink;
+				background-color: lightgray;
+			}
+			/* --------------------------------------------- */
+			/* before和after在盒子div的内部的前面插入或者是内部的后面插入 */
+			div::before{
+				content: 'before';
+				background-color: lightblue;
+			}
+			div::after{
+				content: 'after';
+				background-color: lightsalmon;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>伪元素选择器1</h1>
+		<p>
+			伪类选择器
+			用于**向某些选择器添加特殊的效果**，比如：给链接添加特殊效果（链接伪类），或选择第 n 个元素（结构伪类）。
+			伪类选择器
+			书写最大的特点是用**冒号** `:` 表示，比如：`:hover`、`:first-child`。 因为伪类选择器很多，比如：`链接伪类`、`结构伪类` 等，所以这里先讲解常用的链接伪类选择器。
+		</p>
+		<h1>伪元素选择器2</h1>
+		<div>
+			::before and ::after
+		</div>
+		
+	</body>
+</html>
+```
+
+
+
+## 1.8 伪类选择器
 
 `伪类选择器` 用于**向某些选择器添加特殊的效果**，比如：给链接添加特殊效果（链接伪类），或选择第 n 个元素（结构伪类）。
 `伪类选择器` 书写最大的特点是用**冒号** `:` 表示，比如：`:hover`、`:first-child`。 
@@ -225,7 +391,7 @@ ul, div { 样式声明 }		 /* 选择 ul 和 div标签元素 */
 >
 > 类选择器用一个点  .  伪类选择器用两个点  :  
 
-## 1.6 链接伪类选择器
+## 1.9 链接伪类选择器
 
 **链接伪类选择器注意事项：**
 
@@ -301,7 +467,7 @@ a:hover {
 
 > 注意：`:hover` `:active` 也适用于其他标签元素。
 
-## 1.7 结构（位置）伪类选择器（CSS3）
+## 2.0 结构（位置）伪类选择器（CSS3）
 
 - `:first-child`	选取属于其父元素的首个子元素的指定选择器
 
@@ -378,7 +544,7 @@ a:hover {
 
 
 
-## 1.8 目标伪类选择器
+## 2.1 目标伪类选择器
 
 `:target` 目标伪类选择器 选择器可用于选取当前活动的目标元素
 
@@ -407,7 +573,7 @@ a:hover {
 
 
 
-## 1.9 :focus伪类选择器
+## 2.2 :focus伪类选择器
 
 `:focus` 伪类选择器用于选取获得焦点的表单元素。
 
@@ -448,7 +614,7 @@ input:focus {
 
 ![](mark-img/20210405202554834.gif)
 
-## 2.0 复合选择器总结
+## 2.3 复合选择器总结
 
 | 选择器          | 作用                   | 特征             | 使用情况 | 隔开符号及用法                             |
 | --------------- | ---------------------- | ---------------- | -------- | ------------------------------------------ |
@@ -459,6 +625,77 @@ input:focus {
 | `:focus` 选择器 | 选择获得光标的表单     | 跟表单相关       | 较少     | `input:focus` 记住这个写法                 |
 
 强调：复合选择器的层级写得越细越好（可读性，可维护性，安全性），同时将复合选择器的层级写得越细，可以提前避免大部分的选择器优先级混乱！
+
+## 2.4 测试题
+
+在不修改以下代码的前提下，完成以下任务：
+
+1．链接登录的颜色为红色，同时主导航栏里面的所有的链接改为蓝色（简单）
+
+2．主导航栏和侧导航栏里面文字都是14像素并且是微软雅黑。（中等）
+
+3．主导航栏里面的一级菜单链接文字颜色为绿色。（难）
+
+~~~HTML
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+	<body>
+		<!-- 主导航栏 -->
+		<div class="nav">
+			<ul>
+				<li><a href="#">公司首页</a></li>
+				<li><a href="#">公司简介</a></li>
+				<li><a href="#">公司产品</a></li>
+				<li>
+					<a href="#">联系我们</a>
+					<ul>
+						<li><a href="#">公司邮箱</a></li>
+						<li><a href="#">公司电话</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- 侧导航栏 -->
+		<div class="sitenav">
+			<div class="site-l">左侧导航栏</div>
+			<div class="site-r"><a href="#">登录</a></div>
+		</div>
+	</body>
+</html>
+~~~
+
+1. ~~~CSS
+   <!--后代选择器-->
+   .nav a{
+   		    color: lightblue;
+   		}
+   .site-r a{
+   			 color: red;
+   			}
+   ~~~
+
+2. ~~~CSS
+   <!--并集选择器-->
+   .nav,
+   .sitenav{
+   				font-size: 14px;
+   				font-family: 微软雅黑;
+   			}
+   ~~~
+
+3. ~~~CSS
+   <!--子代选择器-->
+   .nav>ul>li>a{
+   				color: lightgreen;
+   			}
+   ~~~
+
+   
 
 # 二、CSS 的元素显示模式
 
@@ -495,7 +732,7 @@ HTML 元素一般分为 `块元素` 和 `行内元素` 两种类型。
 
 - 相邻行内元素在一行上，一行可以显示多个
 
-- 高、宽直接设置是无效的
+- 高、宽直接设置是无效的，但水平方向的padding和margin可以设置，垂直方向的无效
 
 - 默认宽度就是它本身内容的宽度
 
@@ -505,8 +742,9 @@ HTML 元素一般分为 `块元素` 和 `行内元素` 两种类型。
 
 - 链接里面不能再放链接
 - 特殊情况链接 `<a>` 里面可以放块级元素，但是给 `<a>` 转换一下块级模式最安全
+- 只有文字才能组成段落，所以p标签里面不能放块级元素，同理还有h1,h2,h3...他们都是文字类块级标签，里面不能放其他块级元素
 
-## 2.4 行内块元素
+## 2.4 行内块元素（inline-block）
 
 在行内元素中有几个特殊的标签：`<img>`、`<input>`、`<th>`、`<td>`，它们同时具有 `块元素` 和 `行内元素` 的特点，有些资料称它们为 `行内块元素`。
 
@@ -820,17 +1058,35 @@ background-position: x y;
 | `position` | top \| center \| bottom \| left \| rigth 方位名词 |
 
 - 参数是方位名词
+  
   - 如果指定的两个值都是方位名词，则两个值前后顺序无关，比如 left top 和 top left 效果一致
+  
+  - ~~~CSS
+    background-position: top left 让图片在左上角，这种为图片默认的位置
+    ~~~
+  
   - 如果只指定了一个方位名词，另一个值省略，则**第二个值默认居中对齐**
 
 
-- 参数是精确单位
+- 参数是精确单位 （浏览器中x是向右走的，y是向下走的）
   - 如果参数值是精确坐标，那么第一个肯定是 x 坐标，第二个一定是 y 坐标
   - 如果只指定一个数值，那该数值一定是 x 坐标，**另一个默认垂直居中**
 
 
 - 参数是混合单位
   - 如果指定的两个值是精确单位和方位名词混合使用，则第一个值是 x 坐标，第二个值是 y 坐标
+
+```css
+background-position: left 10px top 15px; /* 10px, 15px */
+background-position: left top ; /* 0px, 0px */
+background-position: 10px 15px; /* 10px, 15px */
+background-position: left 15px; /* 0px, 15px */
+background-position: 10px top ; /* 10px, 0px */
+background-position: left top 15px; /* 0px, 15px */
+background-position: left 10px top ; /* 10px, 0px */
+```
+
+
 
 ## 3.5 背景图像固定（背景附着）
 
@@ -861,6 +1117,7 @@ background-attachment : scroll | fixed
             background-image: url(images/bg.jpg);
             background-repeat: no-repeat;
             background-position: center top;
+         /* 背景图片的位置，水平居中，垂直靠上；因为图片很宽的时候默认是左上角 */
             /* 把背景图片固定住 */
             background-attachment: fixed;
             color: #fff;
@@ -936,7 +1193,7 @@ background: transparent url(image.jpg) no-repeat fixed top;
 
 这是实际开发中，我们更提倡的写法。
 
-## 3.7 背景色半透明
+## 3.7 背景色半透明（CSS3）
 
 CSS3 为我们提供了背景颜色半透明的效果。
 
@@ -977,7 +1234,109 @@ background: rgba(0, 0, 0, 0.3);
 </html>
 ```
 
-## 3.8 背景总结
+## 3.8 背景缩放（CSS3）
+
+`background-size`   
+
+通过background-size设置背景图片的尺寸，就像我们设置img的尺寸一样，在移动Web开发中做屏幕适配应用非常广泛。其参数设置如下：
+
+a）可以设置长度单位（px）或百分比（设置百分比时，参照盒子的宽高）
+
+b）设置为cover时，会自动调整缩放比例，保证图片始终填充满背景区域，如有溢出部分则会被隐藏。 `保证等比例缩放 充满整个容器 使用最多`   
+
+c）设置为contain会自动调整缩放比例，保证图片始终完整显示在背景区域。` 保证等比例缩放 保证图片完整出现 但是会有部分裸露`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style>
+			/* 选择第一个字 */
+			p::first-letter{
+				color: red;
+				font-size: 30px;
+				font-family: 幼圆;
+			}
+			/* 选择第一行，注意 第一行是指在页面中显示的第一行，而不是p里面自己写的第一行 */
+			p::first-line{
+				color: lightblue;
+				font-weight: 700;
+			}
+			/* 选中文字的时候，文字会变成粉色 */
+			p::selection{
+				color: lightpink;
+				background-color: lightgray;
+			}
+			/* --------------------------------------------- */
+			/* before和after在盒子div的内部的前面插入或者是内部的后面插入 */
+			div::before{
+				content: 'before';
+				background-color: lightblue;
+			}
+			div::after{
+				content: 'after';
+				background-color: lightsalmon;
+				/* 将背景图片缩放成水平100px 垂直200px */
+				background-size: 100px 200px;
+				/* 将背景图片缩放成水平100px 垂直等比例缩放 */
+				background-size: 100px;
+				/* 将图片缩放为原来的一半 */
+				background-size: 50%;
+				/* 	自动调整图片的大小，始终保持等比例缩放，但是要求图片充满整个区域，直到长和宽都满足区域大小就停止，溢出部分自动隐藏 */
+				background-size: cover;
+				/* 等比例缩放，只要宽度或者高度其中一个满足容器要求就不再缩放/放大，能保证图片完整性 */
+				background-size: contain;
+			}
+			.top{
+				height: 500px;
+				width: 500px;
+				display: block;
+				color: white;
+				font-weight: 700;
+				background-image: url(text.jpg);
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+		</style>
+	</head>
+	<body>
+		<span class="top">伪元素选择器1</span>
+		<p>
+			伪类选择器
+			用于**向某些选择器添加特殊的效果**，比如：给链接添加特殊效果（链接伪类），或选择第 n 个元素（结构伪类）。
+			伪类选择器
+			书写最大的特点是用**冒号** `:` 表示，比如：`:hover`、`:first-child`。 因为伪类选择器很多，比如：`链接伪类`、`结构伪类` 等，所以这里先讲解常用的链接伪类选择器。
+		</p>
+		<h1>伪元素选择器2</h1>
+		<div>
+			::before and ::after
+		</div>
+		
+	</body>
+</html>
+```
+
+## 3.9 多背景（CSS3）
+
+以逗号分隔可以设置多背景，可用于自适应布局 做法就是 用逗号隔开就好了。
+
+- 一个元素可以设置多重背景图像。
+- 每组属性间使用逗号分隔。
+- 如果设置的多重背景图之间存在着交集（即存在着重叠关系），前面的背景图会覆盖在后面的背景图之上。
+- 为了避免背景色将图像盖住，背景色通常都定义在最后一组上。
+
+```CSS
+	/* 多背景图片 */
+				background: url(text.jpg) no-repeat left top ,
+				url(text1.jpg) no-repeat right bottom hotpink;
+```
+
+
+
+## 3.9 背景总结
 
 | 属性                   | 作用           | 值                                               |
 | ---------------------- | -------------- | ------------------------------------------------ |
@@ -991,7 +1350,7 @@ background: rgba(0, 0, 0, 0.3);
 
 背景图片：实际开发常见于 logo 或者一些装饰性的小图片或者是超大的背景图片，优点是非常便于控制位置（精灵图也是一种运用场景）。
 
-## 3.9 王者荣耀案例
+## 4.0 王者荣耀案例
 
 ```html
 <!doctype html>
